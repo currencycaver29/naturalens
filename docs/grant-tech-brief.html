@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>NaturaLens — Grant interview pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #fafaf8;
+    --ink: #111111;
+    --muted: #5c5c5c;
+    --caption: #8a8a8a;
+    --rule: #e6e6e2;
+    --surface: #f1f1ed;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #ecece8;
+    color: var(--ink);
+    font-family: Archivo, sans-serif;
+    font-size: 9.75pt;
+    line-height: 1.4;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @page { size: letter; margin: 0; }
+  .sheet {
+    width: 8.5in;
+    height: 11in;
+    padding: 0.48in 0.62in 0.42in;
+    background: var(--paper);
+    page-break-after: always;
+    overflow: hidden;
+  }
+  h1, h2, h3, h4 {
+    font-family: Outfit, sans-serif;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin: 0;
+    line-height: 1.1;
+  }
+  h1 { font-weight: 200; font-size: 34pt; letter-spacing: -0.045em; line-height: 0.92; }
+  h2 { font-size: 14.5pt; margin: 0 0 6px; }
+  h3 { font-size: 10.5pt; font-weight: 400; margin: 0 0 3px; }
+  p { margin: 0 0 7px; }
+  .mast {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 12px;
+  }
+  .mast-left { display: flex; gap: 12px; align-items: flex-end; }
+  .mark { width: 30px; height: 30px; color: var(--ink); flex: none; margin-bottom: 3px; }
+  .meta {
+    font-size: 7.5pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--caption);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .lede {
+    font-family: Outfit, sans-serif;
+    font-size: 16.5pt;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 1.18;
+    max-width: 22em;
+    margin: 0 0 13px;
+  }
+  .section { margin-bottom: 12px; }
+  .rule { height: 1px; background: var(--ink); margin: 0 0 8px; border: 0; }
+  .eyebrow {
+    font-size: 7.5pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--caption);
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 16px; }
+  .card { background: var(--surface); padding: 10px 12px 9px; }
+  .card h4 { font-size: 11pt; font-weight: 400; margin: 0 0 3px; }
+  .card p { margin: 0; font-size: 9.25pt; }
+  ul { margin: 0; padding-left: 1.05em; }
+  li { margin-bottom: 3px; }
+  .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .cols-3 h4 {
+    font-size: 10.5pt;
+    font-weight: 400;
+    margin: 0 0 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--ink);
+  }
+  .never {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8px 11px;
+    margin: 6px 0 0;
+    font-size: 8.75pt;
+    line-height: 1.35;
+  }
+  .never strong { font-weight: 600; }
+  .small { color: var(--muted); font-size: 8.25pt; }
+  .say { font-weight: 500; }
+  .mast-right { text-align: right; font-size: 8.5pt; color: var(--muted); line-height: 1.35; padding-bottom: 2px; }
+  .mast-right strong { color: var(--ink); font-weight: 600; }
+  .flash {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    margin: 0 0 14px;
+    border: 1px solid var(--rule);
+  }
+  .flash div { background: var(--paper); padding: 9px 11px 8px; }
+  .flash .k {
+    font-size: 7pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--caption);
+    font-weight: 500;
+  }
+  .flash .v {
+    font-family: Outfit, sans-serif;
+    font-size: 12.5pt;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin-top: 2px;
+    line-height: 1.15;
+  }
+  .qa { margin: 0 0 7px; padding: 0 0 7px; border-bottom: 1px solid var(--rule); }
+  .qa:last-of-type { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
+  .q {
+    font-family: Outfit, sans-serif;
+    font-size: 11pt;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin: 0 0 3px;
+  }
+  .loop {
+    font-family: Outfit, sans-serif;
+    font-size: 12pt;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    padding: 9px 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    margin: 4px 0 8px;
+    line-height: 1.32;
+  }
+  @media screen {
+    body { padding: 24px 0; }
+    .sheet {
+      margin: 0 auto 24px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 18px 40px rgba(0,0,0,0.08);
+    }
+  }
+</style>
+</head>
+<body>
+
+<article class="sheet">
+  <header class="mast">
+    <div class="mast-left">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="16" cy="12" r="9"/>
+          <path d="M20.5,4.2C19.2,3.4,17.6,3,16,3s-3.2,0.4-4.5,1.2C14.2,5.8,16,8.7,16,12C16,8.7,17.8,5.8,20.5,4.2z"/>
+          <circle cx="12" cy="12" r="1"/>
+          <circle cx="20" cy="12" r="1"/>
+          <path d="M16.1,21c2.2,2.3,5.4,3.8,8.9,3.8h0V12"/>
+          <path d="M7,12c0,9,9.7,17,19,17"/>
+        </g>
+      </svg>
+      <div>
+        <div class="meta">Grant interview · what to say in the room</div>
+        <h1>NaturaLens</h1>
+      </div>
+    </div>
+    <div class="mast-right">
+      <strong>Internal prep · 24 Aug 2026</strong><br>
+      naturalens.ca
+    </div>
+  </header>
+
+  <p class="lede">Point your phone at an animal. NaturaLens names it and keeps a private log of what you found.</p>
+
+  <div class="flash">
+    <div><div class="k">The loop</div><div class="v">See it · name it · keep it</div></div>
+    <div><div class="k">Who it is for</div><div class="v">Anyone in the field</div></div>
+    <div><div class="k">Stage today</div><div class="v">Working app, closed testers</div></div>
+    <div><div class="k">The log</div><div class="v">Stays on your phone</div></div>
+    <div><div class="k">First focus</div><div class="v">Polar bear</div></div>
+    <div><div class="k">The ask</div><div class="v">Run it. Grow the photos.</div></div>
+  </div>
+
+  <section class="section">
+    <div class="eyebrow">Sixty seconds</div>
+    <h2>The pitch</h2>
+    <hr class="rule" />
+    <p>Most people who see an animal in the wild cannot name it — and naming is the first step toward caring about it. Field guides are slow. Experts are rare. Other apps often want an account, a community, or a live internet connection in places that do not have one.</p>
+    <p>NaturaLens is a personal field notebook: take a photo, get a name in about two seconds, save the find, see it later on a list and on a map. No account. No social feed. That loop already works. The website is live. People can join a waitlist. We can invite testers on Apple’s TestFlight. In parallel we are photographing wildlife ourselves — starting with polar bears — so the same app can later name animals <em>on the phone</em>, even with no signal.</p>
+  </section>
+
+  <section class="section">
+    <div class="eyebrow">Why a grant should care</div>
+    <h2>Conservation only works if the tool gets used</h2>
+    <hr class="rule" />
+    <div class="grid-2">
+      <div class="card">
+        <h4>You cannot protect what you cannot name</h4>
+        <p>Education and conservation both start with recognition. If naming an animal takes a guidebook or a good data connection, most people never do it. We are building the fastest honest loop we can: look, name, keep.</p>
+      </div>
+      <div class="card">
+        <h4>The places that need this have the worst signal</h4>
+        <p>A wildlife tool that dies without cell service is a compromised field tool. Cloud naming lets us ship now and learn from real use. Teaching our own small model is how it later works offline, cheaper, and more privately — which is the version that belongs in the field.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="eyebrow">Proof we are not an idea</div>
+    <h2>What already exists</h2>
+    <hr class="rule" />
+    <div class="cols-3">
+      <div>
+        <h4>In people’s hands</h4>
+        <ul>
+          <li>A working iPhone app: photo, name, save, map.</li>
+          <li>A name in about two seconds.</li>
+          <li>Finds stay on the phone. We do not keep a copy of your log.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>In public</h4>
+        <ul>
+          <li>naturalens.ca is live, with a waitlist.</li>
+          <li>Apple Developer is paid. Testers get a TestFlight invite — a closed list, not the public App Store.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Behind the scenes</h4>
+        <ul>
+          <li>Our own tool for labeling field photos.</li>
+          <li>A polar-bear training loop on photos we took — not a purchased library.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</article>
+
+<article class="sheet">
+  <section class="section">
+    <div class="eyebrow">If they ask how the naming works</div>
+    <h2>Two sentences. Then stop.</h2>
+    <hr class="rule" />
+    <div class="loop">
+      Today the photo goes to a cloud service, which sends back a name and a few facts. Next, a small model we taught on our own photos will run on the phone, with the cloud as backup when it is unsure.
+    </div>
+    <p>We did not invent a new kind of AI. We rent a fast naming service so real people can use the product now, and we teach a compact, already-trained model on our field photos so we are not rented forever. Polar bear is first because we can collect and label it, it is visually distinct, and the conservation story is real. More species come after the loop is proven. The name is a helpful guess, not a scientific ID — we would rather say “we’re not sure” than invent an answer.</p>
+  </section>
+
+  <section class="section">
+    <div class="eyebrow">Questions they actually ask</div>
+    <h2>Answers in plain language</h2>
+    <hr class="rule" />
+    <div class="qa">
+      <p class="q">Why not just use iNaturalist or Seek?</p>
+      <p>Those products prove people want this. We are earlier and simpler: a private log, our own field photos, and a path to working without the internet. We are not claiming we beat their models today. We are building the loop we need in order to own the naming instead of renting it forever.</p>
+    </div>
+    <div class="qa">
+      <p class="q">Where do the photos go? Is this private?</p>
+      <p>For naming, the picture is sent out for that one request. The saved log stays on the phone. No accounts. No public map of other people’s finds. Moving naming onto the phone is how privacy and offline arrive together.</p>
+    </div>
+    <div class="qa">
+      <p class="q">Is it on the App Store? What is actually novel?</p>
+      <p>Not publicly. TestFlight is a closed invite — real software on real phones, not a slide deck. Do not oversell a new invention. The work that is ours is the closed loop: a product people can use, photos we took ourselves, and a path onto the phone. Grants fund that execution and that data.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="eyebrow">Money</div>
+    <h2>Ask for a small operating budget. Not a supercomputer.</h2>
+    <hr class="rule" />
+    <p>A defensible band is about <strong>$2,000–$8,000</strong> for a few months, or the grant’s mini-award. Apple’s developer fee is already paid. Cloud naming is a fraction of a cent per photo; on-phone naming is pay-once — rent it long enough to learn, then stop renting.</p>
+    <div class="grid-2">
+      <div>
+        <h3>The money is for</h3>
+        <ul>
+          <li>Naming-service usage, so testers are not blocked when the free allowance runs out.</li>
+          <li>Time in the field taking photos — our dataset, not stock pictures.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>The money is not for</h3>
+        <ul>
+          <li>A computer cluster, or “training AI from scratch.”</li>
+          <li>A photo library, a labeling farm, accounts, or a social network.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="eyebrow">Stay honest · then the one paragraph</div>
+    <h2>Do not reach. Then say this.</h2>
+    <hr class="rule" />
+    <div class="never">
+      <strong>Do not say:</strong> we built our own ChatGPT · naming already happens on the phone · we are on the App Store · we store everyone’s sightings on our servers · photos never leave the phone · we bought a photo library · we have thousands of labeled images · the name is scientifically verified.
+    </div>
+    <p style="margin-top:10px; font-size:12.5pt; font-family:Outfit,sans-serif; font-weight:300; letter-spacing:-0.025em; line-height:1.22; max-width:46em;">
+      We already have a working app that names an animal from a photo and keeps a private log. The grant is not to invent a new kind of AI — it is to run that loop, grow our field photos, and teach a small model so it works with no signal. Polar bears first, then more species.
+    </p>
+  </section>
+</article>
+
+</body>
+</html>

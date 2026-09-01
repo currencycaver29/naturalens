@@ -47,7 +47,9 @@ Everything else is roadmap.
 
 ### 1.3 Non-goals for the MVP
 
-- No accounts, no sync, no backend of our own. History is local to the device.
+- No sync of finds. History is local to the device. Sign-in (§5c) stores an email and
+  optional display name on the Worker so we can email a code; photographs still do not
+  leave the phone except when you identify one.
 - No continuous/live detection — one photo, on a button press.
 - No bounding boxes. The model returns a label, not a location in the frame.
 - No offline identification. Naming a species is a network call and fails without one;
@@ -117,7 +119,8 @@ Picker on 13/14, no `READ_MEDIA_*`), not a JS album UI.
 └────────────────────────────────────────────────────┘
 ```
 
-There is no server of ours. The app calls Gemini directly.
+Identification has no server of ours — the app calls Gemini directly. Sign-in is the
+exception: email and OTP go to the `naturalens-web` Worker (§5c).
 
 | Layer | Choice |
 |---|---|
@@ -341,6 +344,70 @@ change to the data model, not a screen.
 
 ---
 
+## 5c. Sign-in
+
+Three screens stand ahead of the app: an onboarding intro (19), an email entry (20),
+and a six-digit code (21). `AuthFlow` is a sibling of `MainLayout` with a local
+`'intro' | 'email' | 'otp'` step, and `App.tsx` renders one or the other on whether
+`session` is null. **It is a blocking gate** — camera, finds and map are unreachable until
+a code verifies.
+
+The Worker at `naturalens.ca` owns the code. `POST /api/auth/request-code` stores an HMAC
+of the digits in D1 and emails them through Resend. `POST /api/auth/verify-code` creates
+the user on first success and returns a Bearer token, stored in the Keychain via
+`expo-secure-store`. The profile (`id`, email, optional display name, member-since) is
+cached in AsyncStorage so Settings can render offline. `GET /api/me` revalidates in the
+background after launch; a 401 signs the device out. Network failure keeps the cached
+session — this is a field app.
+
+Auth routes do **not** use the waitlist `isSameOrigin()` gate. React Native sends neither
+`Origin` nor `Referer`. Waitlist stays origin-locked; auth is rate-limited by email and IP
+instead.
+
+`session` lives in `AppStateContext` for the same reason `history` does — `App.tsx` and
+`SettingsSheet` both read it. `step` and the typed address do **not**. There is no
+separate `has-seen-intro` flag; the session *is* the flag. Signing out returns you to the
+intro, not to the email screen, and leaves the finds alone. History is local and was never
+tied to an identity (§4).
+
+Display name is edited in Settings (`PATCH /api/me`), not during sign-in.
+
+### Why the intro has no photograph
+
+The screen was specified as documentary wildlife photography. There is none in the repo,
+and the five animal SVGs on the landing site are fill-based silhouettes with no stroke
+attributes at all, so beside the owl mark and the icon set they read as a different
+product. Rather than ship a placeholder photo or an illustration that fights the line
+system, Screen 19 is inverted polarity and 44px Outfit ExtraLight — a black ground and
+the largest type in the app.
+
+That also buys the cut into Screen 20, which is paper white. The flow goes dark, then
+bright, instead of three white screens in a row. `BrandSplash` fades its white layer to
+zero over the top of the intro, so the handoff reads as a reveal rather than a flash.
+
+### Two mechanics worth not rediscovering
+
+- **`sessionLoading` holds the native splash alongside `fontsLoaded`.** The stored session
+  is an async read, so without it a signed-in user gets a frame of the onboarding intro
+  before the camera — the same class of bug the font gate already existed to prevent.
+- **Screen 21 is one hidden `TextInput` stretched across six drawn boxes.** Six real inputs
+  is the obvious build and the wrong one: one-time-code autofill arrives as a single
+  six-character paste, and backspace across a box boundary has to be emulated from key
+  events. One input gets both for free and the boxes become what they are — a readout. Its
+  `selection` is pinned to the end so a tap cannot drop the caret mid-string, where a
+  keystroke would rewrite the middle of the code and leave the boxes lying about it.
+
+Screens 20 and 21 are the **first text inputs in the app**, so they also settle the field
+style: uppercase 11px label, a 2px bordered box whose border goes to ink on focus, a pill
+submit, caption-grey fine print. That is lifted from the waitlist form on the landing site
+rather than invented — same design system, already solved, and two sign-up forms that look
+different is worse than a little duplication. Field-level errors render in **ink, not
+`danger`** (`FieldError`): the system reserves hue for status pills and overlays (§6), and
+the landing page already renders its waitlist errors in black. Conditions of the world
+still get a banner.
+
+---
+
 ## 6. Design system
 
 Source of truth: [`packages/design/`](../packages/design/). Edit `tokens.json` once,
@@ -370,10 +437,12 @@ the change. The browsable Volume One spec lives in
 
 ## 7. Known gaps
 
+- **Sign-in emails a six-digit code via Resend (§5c).** The gate is real. Codes never
+  appear in API JSON or production logs. `RESEND_API_KEY` and `AUTH_PEPPER` must be set on
+  `naturalens-web` or request-code fails closed.
 - The Gemini key ships to the client (§2.2).
-- Nothing is tested — there's no test runner in the project.
-- CI typechecks the mobile app only, and only on `main`, so branches get no CI. It also
-  doesn't run `generate.mjs --check`, so the generated token outputs can drift from
+- CI typechecks the mobile app and the web Worker. It still doesn't run
+  `generate.mjs --check`, so the generated token outputs can drift from
   `tokens.json` without anything noticing.
 - The resolved Android manifest still pulls in `READ/WRITE_EXTERNAL_STORAGE` from a
   dependency's config plugin. Worth tracking down — the app only writes to its own

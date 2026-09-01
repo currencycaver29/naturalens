@@ -1,0 +1,4 @@
+# Copy to .dev.vars (gitignored) for `wrangler dev`.
+# Production: `npx wrangler secret put RESEND_API_KEY` and `npx wrangler secret put AUTH_PEPPER`
+RESEND_API_KEY=
+AUTH_PEPPER=

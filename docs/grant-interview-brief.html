@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>NaturaLens — Grant interview briefing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #fafaf8;
+    --ink: #111111;
+    --muted: #5c5c5c;
+    --caption: #8a8a8a;
+    --rule: #e6e6e2;
+    --surface: #f1f1ed;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Archivo, sans-serif;
+    font-size: 10.25pt;
+    line-height: 1.45;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @page {
+    size: letter;
+    margin: 0.62in 0.68in 0.7in;
+  }
+  .cover {
+    page-break-after: always;
+    min-height: 9.6in;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 0.4in;
+  }
+  .mark {
+    width: 52px;
+    height: 52px;
+    color: var(--ink);
+  }
+  h1, h2, h3 {
+    font-family: Outfit, sans-serif;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin: 0;
+    line-height: 1.12;
+  }
+  .cover h1 {
+    font-weight: 200;
+    font-size: 64pt;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    margin: 0.15in 0 0.18in;
+  }
+  .cover .lede {
+    font-size: 13.5pt;
+    font-weight: 300;
+    max-width: 28ch;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+  .meta {
+    font-size: 8.5pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--caption);
+    font-weight: 500;
+  }
+  .cover-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid var(--ink);
+    padding-top: 14px;
+    font-size: 8.5pt;
+    color: var(--muted);
+  }
+  .cover-foot strong { color: var(--ink); font-weight: 600; }
+  h2 {
+    font-size: 18pt;
+    margin: 0 0 10px;
+    padding-top: 2px;
+  }
+  h3 {
+    font-size: 11.5pt;
+    font-weight: 400;
+    margin: 16px 0 6px;
+  }
+  p { margin: 0 0 8px; }
+  .section { page-break-inside: avoid; margin-bottom: 22px; }
+  .section.break { page-break-before: always; }
+  .rule {
+    height: 1px;
+    background: var(--ink);
+    margin: 0 0 14px;
+    border: 0;
+  }
+  .rule.hair { background: var(--rule); }
+  .eyebrow {
+    font-size: 8pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--caption);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.25pt;
+    margin: 6px 0 12px;
+  }
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: 6px 8px 6px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  th {
+    font-size: 7.5pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--caption);
+    font-weight: 500;
+    padding-bottom: 5px;
+  }
+  td:first-child, th:first-child { width: 28%; font-weight: 500; }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 22px;
+  }
+  .card {
+    background: var(--surface);
+    padding: 12px 14px 10px;
+  }
+  .card h4 {
+    font-family: Outfit, sans-serif;
+    font-weight: 400;
+    font-size: 10.5pt;
+    margin: 0 0 4px;
+    letter-spacing: -0.02em;
+  }
+  .card p, .card li { font-size: 9.25pt; margin: 0; }
+  ul { margin: 0 0 8px; padding-left: 1.1em; }
+  li { margin-bottom: 3px; }
+  .qa { page-break-inside: avoid; margin: 0 0 13px; padding: 0 0 11px; border-bottom: 1px solid var(--rule); }
+  .qa:last-child { border-bottom: 0; }
+  .q {
+    font-family: Outfit, sans-serif;
+    font-size: 11pt;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin: 0 0 5px;
+  }
+  .say {
+    font-weight: 500;
+  }
+  .never {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 14px;
+    margin: 10px 0 14px;
+    font-size: 9.25pt;
+  }
+  .never strong { font-weight: 600; }
+  .flash {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    margin: 8px 0 14px;
+    border: 1px solid var(--rule);
+  }
+  .flash div {
+    background: var(--paper);
+    padding: 10px 12px 9px;
+  }
+  .flash .k {
+    font-size: 7.5pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--caption);
+    font-weight: 500;
+  }
+  .flash .v {
+    font-family: Outfit, sans-serif;
+    font-size: 12.5pt;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin-top: 2px;
+    line-height: 1.15;
+  }
+  .flow {
+    font-family: Outfit, sans-serif;
+    font-size: 9.5pt;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    padding: 12px 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    margin: 8px 0 12px;
+    line-height: 1.55;
+  }
+  .muted { color: var(--muted); }
+  .small { font-size: 8.75pt; color: var(--muted); }
+  code, .mono {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 8.5pt;
+  }
+  .cols-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  .cols-3 h4 {
+    font-family: Outfit, sans-serif;
+    font-weight: 400;
+    font-size: 10.5pt;
+    margin: 0 0 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .live { font-weight: 600; }
+  footer.page {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div>
+    <div class="meta">Internal briefing · August 14, 2026</div>
+    <svg class="mark" viewBox="0 0 32 32" aria-hidden="true" style="margin-top:28px">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="16" cy="12" r="9"/>
+        <path d="M20.5,4.2C19.2,3.4,17.6,3,16,3s-3.2,0.4-4.5,1.2C14.2,5.8,16,8.7,16,12C16,8.7,17.8,5.8,20.5,4.2z"/>
+        <circle cx="12" cy="12" r="1"/>
+        <circle cx="20" cy="12" r="1"/>
+        <path d="M16.1,21c2.2,2.3,5.4,3.8,8.9,3.8h0V12"/>
+        <path d="M7,12c0,9,9.7,17,19,17"/>
+      </g>
+    </svg>
+    <h1>NaturaLens</h1>
+    <p class="lede">Grant interview briefing.<br>Tech facts you can say out loud.</p>
+  </div>
+  <div class="cover-foot">
+    <div>
+      <strong>Use this in the room.</strong> Do not submit it as the application.<br>
+      Grounded in the repo as of 14 Aug 2026 — not the older architecture draft.
+    </div>
+    <div style="text-align:right">
+      naturalens.ca<br>
+      skim.naturalens.ca
+    </div>
+  </div>
+</section>
+
+<!-- PAGE: FLASH -->
+<section class="section">
+  <div class="eyebrow">Memorize this page</div>
+  <h2>Sixty-second pitch</h2>
+  <hr class="rule" />
+  <p style="font-size:12.5pt; font-family:Outfit,sans-serif; font-weight:300; letter-spacing:-0.025em; line-height:1.28; max-width:48ch; margin-bottom:12px;">
+    NaturaLens is a phone app that names the animal in front of you and keeps a log of what you found. Identification today is a hosted vision-language model. In parallel we are labeling our own field photos and fine-tuning a small detector so the same loop can later run on-device, offline, and cheap at scale.
+  </p>
+  <div class="flash">
+    <div><div class="k">Product loop</div><div class="v">Capture → identify → save</div></div>
+    <div><div class="k">Identify now</div><div class="v">Gemini 3.1 Flash-Lite</div></div>
+    <div><div class="k">Latency</div><div class="v">~1.5–2 seconds</div></div>
+    <div><div class="k">App</div><div class="v">Expo + EAS / TestFlight</div></div>
+    <div><div class="k">Hosting</div><div class="v">Cloudflare Workers + D1</div></div>
+    <div><div class="k">Custom model</div><div class="v">SSDLite, polar bear</div></div>
+    <div><div class="k">Training style</div><div class="v">Transfer learning, not scratch</div></div>
+    <div><div class="k">Labeler</div><div class="v">Live at skim.naturalens.ca</div></div>
+    <div><div class="k">Finds storage</div><div class="v">On the phone only</div></div>
+  </div>
+  <div class="never">
+    <strong>Never claim:</strong> we trained a foundation model · we fine-tune CLIP/ResNet in the shipped app · identification is on-device today · we are on the public App Store · we have accounts, maps, or GPS · we store user sightings on our servers · we licensed a photo library · we run AWS/GCP app servers · the custom detector is in the phone yet.
+  </div>
+  <div class="grid-2">
+    <div>
+      <h3>Say this instead</h3>
+      <ul>
+        <li>Cloud foundation-model ID now, so we can test the product in the field.</li>
+        <li>Fine-tune a compact pretrained detector (SSDLite / YOLO-class) once labels exist.</li>
+        <li>Grant money runs Gemini quota, field photos, and the dataset — not a GPU cluster, and not the Apple fee (already paid).</li>
+        <li>Polar bear is the first class because it is tractable and conservation-relevant.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Stage, honestly</h3>
+      <ul>
+        <li>Apple Developer is enrolled. iOS alpha path is EAS → TestFlight — not a public App Store listing.</li>
+        <li>Landing + waitlist live on naturalens.ca.</li>
+        <li>Internal polar-bear labeler + training loop exist.</li>
+        <li>On-device inference is the destination, not the current binary.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT SHIPS -->
+<section class="section break">
+  <div class="eyebrow">Honesty table — they will ask this</div>
+  <h2>What is built vs not</h2>
+  <hr class="rule" />
+  <table>
+    <thead>
+      <tr><th>Piece</th><th>Status</th><th>What to say</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Mobile app</td>
+        <td class="live">Shipped (alpha)</td>
+        <td>Expo SDK 54, TypeScript. Camera → Gemini → local finds list. Survives restart. Detail view + delete.</td>
+      </tr>
+      <tr>
+        <td>Identification</td>
+        <td class="live">Live</td>
+        <td>Google Gemini API, model <span class="mono">gemini-3.1-flash-lite</span>. Photo resized to 1024px. Structured JSON back.</td>
+      </tr>
+      <tr>
+        <td>Website / waitlist</td>
+        <td class="live">Live</td>
+        <td>Next.js on Cloudflare Workers. D1 table of emails. Domain naturalens.ca / www.</td>
+      </tr>
+      <tr>
+        <td>Labeler (Skim)</td>
+        <td class="live">Live, internal</td>
+        <td>Upload, draw boxes, review, create immutable training runs. R2 images + D1 labels. PIN-gated.</td>
+      </tr>
+      <tr>
+        <td>Custom detector training</td>
+        <td class="live">Code live; weights not in the app</td>
+        <td>SSDLite320 MobileNetV3-Large, one-class polar bear, COCO-pretrained transfer, Colab T4 or local GPU. Exports ONNX / TFLite.</td>
+      </tr>
+      <tr>
+        <td>Our backend API</td>
+        <td>Not started</td>
+        <td>Placeholder. Next job: proxy Gemini so the key leaves the phone.</td>
+      </tr>
+      <tr>
+        <td>Inference microservice</td>
+        <td>Not started</td>
+        <td>Not needed until we serve our own weights. Phone talks to Gemini directly today.</td>
+      </tr>
+      <tr>
+        <td>GBIF / IUCN species DB</td>
+        <td>Not started</td>
+        <td>Planned enrichment. Conservation status today comes from Gemini’s schema enum, not a database.</td>
+      </tr>
+      <tr>
+        <td>Accounts, sync, map, GPS</td>
+        <td>Not in MVP</td>
+        <td>History is local. Location is a later feature and cannot be backfilled onto old finds.</td>
+      </tr>
+      <tr>
+        <td>iOS distribution</td>
+        <td class="live">Account ready</td>
+        <td>Apple Developer enrolled. We can EAS-build and send testers a TestFlight link. That is closed alpha, not a public App Store listing. A TestFlight build is not in testers’ hands yet — the account unblocks it.</td>
+      </tr>
+      <tr>
+        <td>Google Play</td>
+        <td>Not yet</td>
+        <td>No Play Console account yet. Android testers still use Expo Go or a local/dev build until the $25 enrollment.</td>
+      </tr>
+      <tr>
+        <td>On-device TFLite in the app</td>
+        <td>Not wired</td>
+        <td>EAS can now ship a custom native binary (the Expo Go module limit is no longer the blocker). TFLite still is not in the app. Wire it once quality + latency bars are met.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section">
+  <div class="eyebrow">Stack</div>
+  <h2>What we actually run</h2>
+  <hr class="rule" />
+  <table>
+    <thead><tr><th>Layer</th><th>Choice</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Mobile</td><td>React Native via Expo SDK 54, React 19, TypeScript. EAS for iOS builds.</td><td>One codebase, camera APIs. Apple Developer enrolled → TestFlight via EAS. Expo Go remains for local iteration.</td></tr>
+      <tr><td>Camera / images</td><td>expo-camera, expo-image-manipulator, expo-file-system</td><td>Capture, shrink to 1024px for ID, persist display + thumb copies.</td></tr>
+      <tr><td>Local state</td><td>React context + AsyncStorage</td><td>Right size. No Redux. History key is versioned (<span class="mono">naturalens-history-v1</span>).</td></tr>
+      <tr><td>Web</td><td>Next.js 16, Cloudflare Workers, D1</td><td>Landing + waitlist. No Kubernetes.</td></tr>
+      <tr><td>Labeler</td><td>Cloudflare Worker, R2, D1, static UI</td><td>Internal tool. Free-tier caps enforced at 80%.</td></tr>
+      <tr><td>Training</td><td>PyTorch + torchvision SSDLite, Colab T4 or Apple MPS</td><td>Apache/BSD via torchvision. EfficientDet-Lite blocked on TF &lt;2.16 / Python 3.12.</td></tr>
+      <tr><td>Repo</td><td>Single monorepo</td><td>Small team, atomic PRs, one clone.</td></tr>
+      <tr><td>License</td><td>MIT</td><td>Code is MIT. Model weights and field photos are not committed.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="section break">
+  <div class="eyebrow">Architecture</div>
+  <h2>Two systems, one product</h2>
+  <hr class="rule" />
+  <p>Interviewers often hear “AI wildlife app” and assume one model. We have a product path and a model path. Keep them separate when you talk.</p>
+
+  <h3>A. What the user touches (alpha)</h3>
+  <div class="flow">
+    Phone camera → freeze the still → resize 1024px JPEG → Gemini Flash-Lite (JSON schema) → species + confidence + facts → user saves → AsyncStorage metadata + two JPEGs in the app document directory.
+  </div>
+  <p class="small">There is no NaturaLens server in this loop. The phone calls Google. Finds never leave the device except the photo bytes sent for that identify call.</p>
+
+  <h3>B. What we train in parallel (internal)</h3>
+  <div class="flow">
+    Field photo → Skim upload (EXIF-normalized, sha256 id) → R2 + D1 boxes → Create run (immutable manifest) → Colab SSDLite train → metrics / preds / TFLite back to R2 → review failures → relabel.
+  </div>
+  <p class="small">This loop is polar-bear detection (bounding box), not yet the multi-species namer in the phone. Gemini still answers “what species is this?” for testers.</p>
+
+  <div class="grid-2" style="margin-top:12px">
+    <div class="card">
+      <h4>Why cloud ID now</h4>
+      <p>We can leave Expo Go now: Apple Developer + EAS produces a real iOS binary (and can include custom native modules later). Cloud ID is still the right call because the custom detector is not wired, the dataset is not at the switch bar, and we can iterate the product loop without freezing a model.</p>
+    </div>
+    <div class="card">
+      <h4>Why on-device later</h4>
+      <p>Cloud on 4G is typically 2–9s, not &lt;1s. It needs signal, costs per call, and sends photos off-device. A field tool that dies without LTE is a compromised field tool. On-device + cloud fallback is the destination.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">Identification details they will poke</div>
+  <h2>Gemini call — facts, not vibes</h2>
+  <hr class="rule" />
+  <table>
+    <thead><tr><th>Decision</th><th>Value</th><th>Measured reason</th></tr></thead>
+    <tbody>
+      <tr><td>Model</td><td><span class="mono">gemini-3.1-flash-lite</span></td><td>~1.5s vs ~7–18s for Flash, same answers on test images. Naming an animal does not need a reasoning model.</td></tr>
+      <tr><td>Image size</td><td>1024px wide JPEG, quality 0.8</td><td>Gemini tiles images. 512px saved nothing on tokens or latency; it only lost detail.</td></tr>
+      <tr><td>Thinking budget</td><td>minimal</td><td>Default thinking burned ~230 reasoning tokens of pure latency.</td></tr>
+      <tr><td>Output</td><td>JSON schema</td><td><span class="mono">isAnimal, label, confidence, description, habitat, diet, conservationStatus</span></td></tr>
+      <tr><td>Extra fields cost</td><td>~230ms / 16%</td><td>Median 1454ms → 1681ms vs a 3-field schema. Worth it vs a second round-trip.</td></tr>
+      <tr><td>Non-animal</td><td><span class="mono">isAnimal: false</span> → empty list</td><td>Without this guard the model will happily label a chair as a species at confidence 1.</td></tr>
+      <tr><td>Confidence</td><td>Self-reported, clamped to [0,1]</td><td>Not a calibrated probability. Treat as a hint. Do not quote it as accuracy.</td></tr>
+    </tbody>
+  </table>
+  <p>Species facts ride the same call. Older saved finds without facts are backfilled with a text-only lookup when opened — facts follow from the label, not the pixels. Location could never be backfilled that way, which is why we have not added GPS yet without a plan.</p>
+</section>
+
+<!-- ML -->
+<section class="section break">
+  <div class="eyebrow">The ML question</div>
+  <h2>Are you training a model?</h2>
+  <hr class="rule" />
+  <p><span class="say">Short answer:</span> The app testers use is not running our weights. We are fine-tuning a small pretrained detector on our polar-bear photos. We are not training from scratch and we are not fine-tuning CLIP or ResNet for the product.</p>
+
+  <h3>Architecture</h3>
+  <table>
+    <thead><tr><th>Item</th><th>Choice</th></tr></thead>
+    <tbody>
+      <tr><td>Family</td><td>One-stage object detector, not a classifier-only head.</td></tr>
+      <tr><td>Network</td><td>SSDLite320 + MobileNetV3-Large (torchvision).</td></tr>
+      <tr><td>Classes</td><td>2: background + polar_bear.</td></tr>
+      <tr><td>Init</td><td>Transfer matching tensors from COCO SSDLite weights. Not random init.</td></tr>
+      <tr><td>Optim</td><td>AdamW, lr 1e-3, weight decay 1e-4, cosine annealing, grad clip 10.</td></tr>
+      <tr><td>Default run</td><td>30 epochs, batch 4, seed 13.</td></tr>
+      <tr><td>Augment</td><td>Horizontal flip, scale-and-pad, brightness/contrast.</td></tr>
+      <tr><td>Metric</td><td>mAP@0.5, plus precision/recall at score 0.3. Not “accuracy.”</td></tr>
+      <tr><td>Export</td><td>PyTorch checkpoint, ONNX, float16 TFLite when conversion works.</td></tr>
+      <tr><td>Compute</td><td>Google Colab T4, or local Apple MPS / CUDA. No standing GPU cluster.</td></tr>
+    </tbody>
+  </table>
+  <p>EfficientDet-Lite via MediaPipe Model Maker is the planned mobile fallback, blocked today because it wants TensorFlow &lt;2.16, which has no Python 3.12 wheels. Say “SSDLite now, EfficientDet-class if we need a smaller mobile graph.”</p>
+
+  <h3>Data scale we will quote if asked for a number</h3>
+  <p>Internal architecture notes (targets, not a claim we already have this):</p>
+  <table>
+    <thead><tr><th>Problem</th><th>Minimum</th><th>Better</th></tr></thead>
+    <tbody>
+      <tr><td>Single species detector (e.g. polar bear / deer)</td><td>1k–2k labeled images</td><td>3k–8k</td></tr>
+      <tr><td>Two similar species (polar vs brown bear)</td><td>1.5k–3k per class</td><td>5k+ per class</td></tr>
+      <tr><td>Multi-species (10–20)</td><td>1k+ per species</td><td>3k–10k per species</td></tr>
+      <tr><td>Hard negatives (no animal / confusers)</td><td colspan="2">30–50% of samples</td></tr>
+    </tbody>
+  </table>
+  <p class="small">Early packs were on the order of tens of photos (e.g. 44/20 train/val) — enough to stand up the loop, not enough to claim production mAP. If they ask “how much data do you have?”, say: the pipeline is live; the dataset is still small; the grant is partly to grow labeled field photos, not to buy stock.</p>
+</section>
+
+<section class="section">
+  <div class="eyebrow">Labeler</div>
+  <h2>How labels get into the model</h2>
+  <hr class="rule" />
+  <div class="cols-3">
+    <div>
+      <h4>Store</h4>
+      <ul>
+        <li>Images: Cloudflare R2 bucket.</li>
+        <li>Boxes / review flags / run metadata: D1.</li>
+        <li>Primary key is sha256 of the normalized JPEG — duplicates do not fork the dataset.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Integrity</h4>
+      <ul>
+        <li>Optimistic version → 409 on conflict.</li>
+        <li>Append-only label history.</li>
+        <li>EXIF orientation fixed once at upload.</li>
+        <li>Training run copies an immutable manifest. You cannot silently edit the set mid-train.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Cost control</h4>
+      <ul>
+        <li>Hard caps at 80% of R2 free tier (8 GB, 800k Class A, 8M Class B).</li>
+        <li>Max object 20 MB. Over cap → HTTP 429.</li>
+        <li>Colab reports S3 ops so Worker + GPU share one meter.</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:10px">Photos are ours (field captures), not licensed stock. Later species facts: GBIF / IUCN open data. Do not budget photo-library licenses.</p>
+</section>
+
+<!-- PRIVACY -->
+<section class="section break">
+  <div class="eyebrow">Privacy, security, IP</div>
+  <h2>Where the bits go</h2>
+  <hr class="rule" />
+  <table>
+    <thead><tr><th>Data</th><th>Where it lives</th><th>Leave-this-out</th></tr></thead>
+    <tbody>
+      <tr><td>Identify photo</td><td>Sent to Google Gemini for that request. Resized; not our archive.</td><td>Do not say “photos never leave the phone.” They leave for ID.</td></tr>
+      <tr><td>Saved finds</td><td>On device: JSON in AsyncStorage, JPEGs in the app document directory (not camera cache).</td><td>Do not say we have a sightings database.</td></tr>
+      <tr><td>Waitlist email</td><td>Cloudflare D1. Deduped. Stores user-agent + IP at signup.</td><td>Fine to say we collect email for early access.</td></tr>
+      <tr><td>Labeler photos</td><td>Our R2, internal PIN auth. Not user production data.</td><td>Do not describe it as a public citizen-science upload portal.</td></tr>
+      <tr><td>GPS</td><td>Not in the MVP. Deliberate.</td><td>Privacy page mentions location as a future option. The app does not collect it yet.</td></tr>
+      <tr><td>Gemini API key</td><td><span class="mono">EXPO_PUBLIC_*</span> is inlined in the client bundle.</td><td>Restricted in AI Studio. Next engineering step is a Worker proxy. TestFlight is a closed tester list — still do not share a public App Store / unrestricted link until the key is proxied.</td></tr>
+    </tbody>
+  </table>
+  <p><span class="say">If they ask about privacy:</span> identification requires a network call to Google today. The log is local. We do not operate user accounts. Moving inference on-device is how we get both privacy and offline, together.</p>
+  <p><span class="say">If they ask about IP:</span> application code is MIT. We do not claim ownership of Gemini. Our labeled boxes and future weights are our dataset/model artifacts; weights are gitignored. torchvision SSDLite is Apache/BSD.</p>
+</section>
+
+<!-- Q&A -->
+<section class="section">
+  <div class="eyebrow">Q &amp; A bank</div>
+  <h2>Questions they actually ask</h2>
+  <hr class="rule" />
+
+  <div class="qa">
+    <p class="q">What problem are you solving?</p>
+    <p>Field identification is either slow (guides, experts) or locked to apps that need an account, a community, or a live model download you cannot iterate. We want a fast personal loop: point, name, keep. Conservation and education only work if the tool is used in the places with bad signal — which is why on-device is the end state, not a slogan.</p>
+  </div>
+  <div class="qa">
+    <p class="q">Who is the user?</p>
+    <p>Near term: closed testers and field partners who will photograph wildlife and correct us. Polar bear is the first detection class because the team can collect and label it. Consumer “what bird is that?” is the same loop at larger taxonomy later.</p>
+  </div>
+  <div class="qa">
+    <p class="q">How do testers install the app?</p>
+    <p>iOS: Apple Developer is enrolled. We build with Expo EAS and invite testers on TestFlight — a closed list, not the public App Store. Android: Play Console is not enrolled yet; those testers still use Expo Go or a local build. Do not say the app is “on the App Store.”</p>
+  </div>
+  <div class="qa">
+    <p class="q">Why not just use iNaturalist / Seek / Google Lens?</p>
+    <p>Seek is the existence proof that on-device vision plus geo ranking works — we say that in our own notes. We are earlier: a simpler personal log, our own labeled field data, and a path to region packs (species priors by location/season). We are not claiming we beat Seek’s model today. We are building the capture → label → train loop we would need to own the model instead of renting Gemini forever.</p>
+  </div>
+  <div class="qa">
+    <p class="q">Is this scientifically valid identification?</p>
+    <p>No. It is an assistive namer with self-reported confidence, not a taxonomic authority. Conservation status is an enum the model fills; we fall back to Data Deficient rather than invent a Red List row. A future GBIF/IUCN join is how we stop asking a language model to be a database.</p>
+  </div>
+  <div class="qa">
+    <p class="q">What is novel here technically?</p>
+    <p>Do not oversell novelty. The novel-for-us work is the closed loop: product in the field, our own boxed photos, immutable train runs, failure review, export to TFLite. The architectures (Flash-Lite, SSDLite) are known. Grants fund execution and data, not a new paper architecture.</p>
+  </div>
+  <div class="qa">
+    <p class="q">Why polar bears first?</p>
+    <p>One class, visually distinct in many frames, conservation story, and a dataset we can actually label. Similar-species pairs (polar vs brown) are a later, harder milestone and need more images per class. Starting multi-species at 10k classes is how you never ship.</p>
+  </div>
+  <div class="qa">
+    <p class="q">How will you know the custom model is good enough to replace Gemini?</p>
+    <p>Not a single accuracy number. All of: precision/recall per critical class, stable performance in hard conditions, on-device latency under one second on target phones, then a staged rollout (10% → 50% → 100%) with Gemini still as fallback when confidence is low.</p>
+  </div>
+  <div class="qa">
+    <p class="q">What if Google changes pricing or shuts the model?</p>
+    <p>That is exactly why we are not building the company on a forever Gemini bill. Alpha uses it as a scaffold. The labeler and SSDLite export are the off-ramp. Short term we put a spend cap on the Google project and treat HTTP 429 as a normal user-facing “slow down” state — free-tier limits are already tight.</p>
+  </div>
+  <div class="qa">
+    <p class="q">Why Cloudflare instead of AWS?</p>
+    <p>The surfaces we have today (site, waitlist, labeler, object store) fit Workers + D1 + R2 at essentially free-tier cost. We do not have a GPU cluster or a multi-service VPC to justify AWS. Training uses Colab or a laptop GPU. We will rent GPU hours when a run needs them — not run idle instances for a grant report.</p>
+  </div>
+  <div class="qa">
+    <p class="q">How do you handle bad or malicious labels?</p>
+    <p>Internal tool, allowlisted emails, PIN + lockout. Versioned boxes, append-only history, reviewed flag. Architecture notes also call for an admin queue before user-corrected labels enter training — that user-facing confirm/correct UI is not in the phone yet, so we are not claiming citizen labels as ground truth today.</p>
+  </div>
+  <div class="qa">
+    <p class="q">What’s the biggest technical risk?</p>
+    <p>Three: (1) Gemini key in the client until we proxy it — TestFlight is still a closed list, not a public link. (2) Dataset too small / too clean, so mAP on our val set lies about field performance. (3) TFLite is not in the binary yet. EAS can ship it; the model has not cleared the switch bar.</p>
+  </div>
+  <div class="qa">
+    <p class="q">Do you have tests / CI?</p>
+    <p>CI typechecks the mobile app on main. There is no test runner. Say it if asked; do not volunteer it as a strength. Grant engineering time can include a holdout eval harness — we already dump per-image TP/FP/FN for the labeler overlay.</p>
+  </div>
+  <div class="qa">
+    <p class="q">Open source? Will the model be public?</p>
+    <p>Code is MIT. Field photos and weights are not in git. We have not committed to releasing weights. Do not promise a public model unless the grant requires it — then we can, with license on the weights separate from the app.</p>
+  </div>
+  <div class="qa">
+    <p class="q">How will you measure success in 3–6 months?</p>
+    <p>Product: testers on TestFlight complete capture → identify → save without 429s; Gemini key proxied off the phone. Data: labeled polar-bear set grown toward the 1k+ target; val mAP tracked per run, not a one-off notebook. Model: TFLite artifact timed on a real phone via an EAS build, even if Gemini is still the default.</p>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section class="section break">
+  <div class="eyebrow">Money</div>
+  <h2>What to ask for</h2>
+  <hr class="rule" />
+  <p>Apply. Ask for a small operating budget to run the alpha and grow labeled photos — not a program to pretrain a foundation model. A defensible 3–6 month band is about <strong>$2,000–$8,000</strong> (or the grant’s mini-award). Apple Developer is already paid. iOS TestFlight via EAS does not depend on this grant; Gemini quota and field photos still do.</p>
+  <table>
+    <thead><tr><th>Line</th><th>Why it is real</th><th>Estimate</th></tr></thead>
+    <tbody>
+      <tr><td>Gemini / Google AI, spend-capped</td><td>Free tier 429s will stall testers. Flash-Lite is cheap per photo (fractions of a cent: on the order of $0.25/M input tokens, $1.50/M output; a 1024px image + short JSON is small).</td><td>$200–500</td></tr>
+      <tr><td>Apple Developer</td><td>Already enrolled. Unlocks EAS → TestFlight. Not a grant line.</td><td>Paid — $0 to ask</td></tr>
+      <tr><td>Google Play Console</td><td>Android internal testing. Still needed for Play testers.</td><td>$25 one-time</td></tr>
+      <tr><td>Expo EAS</td><td>iOS cloud builds + TestFlight submit. Free tier is 30 builds/month; pay only if we outrun it or want faster queues.</td><td>$0–99/mo if we leave free</td></tr>
+      <tr><td>Domain / Cloudflare overage</td><td>naturalens.ca already on Workers. Buffer if traffic grows.</td><td>$20–50</td></tr>
+      <tr><td>Test device</td><td>Simulators have no camera. Mid-range Android if we lack one.</td><td>$150–400</td></tr>
+      <tr><td>Field travel / capture time</td><td>Our dataset plan. Not stock licenses.</td><td>$200–1,000</td></tr>
+      <tr><td>Worker to proxy Gemini</td><td>Engineering, not GPU. Infra ~$0 at this scale.</td><td>time, not cash</td></tr>
+      <tr><td>Colab / GPU hours</td><td>Only when a training run needs more than T4 free. Modest fine-tune, not pretrain.</td><td>$0–300 parked</td></tr>
+    </tbody>
+  </table>
+  <div class="never">
+    <strong>Do not headline:</strong> GPU cluster, AWS, photo-library licenses, paid labeling contractors, “train CLIP from scratch.” If the form wants a bigger number, split ~80% product / testing / API, ~20% dataset prep toward the fine-tune.
+  </div>
+  <h3>Unit economics you can say</h3>
+  <p>Cloud ID cost scales with photos. On-device cost is download-once. That is the business case for the model work: Gemini is the right scaffold and the wrong forever bill. Cloudflare hosting at current scale is effectively $0. R2/D1/Workers free tiers cover the labeler if we stay under the hard caps we already coded.</p>
+</section>
+
+<section class="section">
+  <div class="eyebrow">Roadmap</div>
+  <h2>Next, later, not now</h2>
+  <hr class="rule" />
+  <div class="cols-3">
+    <div>
+      <h4>Next</h4>
+      <ul>
+        <li>EAS production build → TestFlight to the closed tester list.</li>
+        <li>Proxy Gemini behind our Worker so the key leaves the client before any wide invite.</li>
+        <li>Grow polar-bear boxes toward the 1k floor.</li>
+        <li>User confirm / correct in the app, then an admin review queue.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Later</h4>
+      <ul>
+        <li>Wire TFLite / Core ML into an EAS binary (dev client / production), now that we can ship custom native modules.</li>
+        <li>Geotag + map. Region “animal packs” (geo prior × vision score).</li>
+        <li>GBIF / IUCN species database so facts are not model prose.</li>
+        <li>More classes; similar-species pairs.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Not now</h4>
+      <ul>
+        <li>Accounts and cloud sync of finds.</li>
+        <li>Live video detection.</li>
+        <li>Training a foundation model.</li>
+        <li>Standing AWS/GCP inference cluster.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ERRORS / OPS -->
+<section class="section">
+  <div class="eyebrow">Ops they may call “production-readiness”</div>
+  <h2>What the user sees when it fails</h2>
+  <hr class="rule" />
+  <table>
+    <thead><tr><th>Failure</th><th>Copy in the app</th></tr></thead>
+    <tbody>
+      <tr><td>Network / fetch reject</td><td>You’re offline. Connect and try again.</td></tr>
+      <tr><td>HTTP 429</td><td>Too many photos too quickly — wait a moment and try again.</td></tr>
+      <tr><td>403, or 400 with “api key” in the body</td><td>Your Gemini API key was rejected.</td></tr>
+      <tr><td>5xx</td><td>Gemini is having trouble right now.</td></tr>
+      <tr><td>Anything else</td><td>Couldn’t identify that photo. Try again.</td></tr>
+    </tbody>
+  </table>
+  <p class="small">A 400 is not automatically a bad key — a malformed request is also 400. We check the body. Fetch only rejects on network failure; 4xx/5xx still resolve. That is why “you’re offline” is safe in the catch.</p>
+</section>
+
+<section class="section">
+  <div class="eyebrow">Closing line</div>
+  <h2>If you only remember one paragraph</h2>
+  <hr class="rule" />
+  <p style="font-size:12pt; font-family:Outfit,sans-serif; font-weight:300; letter-spacing:-0.02em; line-height:1.3;">
+    We already have a working identify-and-log app, a live waitlist, an internal labeling-and-training loop for a polar-bear detector, and an Apple Developer account so we can EAS-build to TestFlight. Identification in testers’ hands is Gemini Flash-Lite. The grant keeps that loop running, funds Gemini quota and field photos, and grows our own labels so we can fine-tune a small on-device model — transfer learning, not a foundation model from scratch.
+  </p>
+  <p class="small" style="margin-top:16px">Sources: repo READMEs, docs/DESIGN.md, docs/Architecture_Notes.md, apps/labeler, models/training, apps/mobile/src/lib/detector.ts. Briefing date 14 August 2026. Do not claim numbers we have not measured in front of them (production mAP, monthly active users, photo count beyond “small / growing”).</p>
+</section>
+
+</body>
+</html>

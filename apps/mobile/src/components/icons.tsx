@@ -99,3 +99,13 @@ export function LibraryIcon({ size = DEFAULTS.size, color = Colors.fg }: IconPro
     </Svg>
   );
 }
+
+/** Back — the only way out of a screen that isn't a tab or a modal (Screens 20 / 21). */
+export function ArrowLeftIcon({ size = DEFAULTS.size, color = Colors.fg }: IconProps) {
+  return (
+    <Svg {...base(size, color)}>
+      <Line x1={19.5} y1={12} x2={5} y2={12} />
+      <Path d="M11 5.5 L4.5 12 L11 18.5" />
+    </Svg>
+  );
+}

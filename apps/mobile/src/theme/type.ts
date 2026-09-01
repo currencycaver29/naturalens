@@ -49,6 +49,8 @@ function outfit(
 
 /** One entry per place Volume One uses the display face. Tune a screen's title here. */
 export const Display = {
+  /** 19 — onboarding headline. The largest display type in the app. */
+  intro: outfit(200, 44, 1.05, -0.01),
   /** 01 — splash wordmark */
   splash: outfit(200, 40, 1.0, -0.01),
   /** 10 / 11 — "Detections" */

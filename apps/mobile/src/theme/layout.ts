@@ -37,3 +37,10 @@ export const SHUTTER_CORE = 58;
 export function bottomClearance(insetBottom: number): number {
   return insetBottom + NAV_INSET + NAV_HEIGHT + Spacing.m;
 }
+
+/**
+ * One box in the six-digit code row (Screen 21). Width is `flex: 1` against the gutter, so
+ * only the height is a decision — 56 keeps the box taller than it is wide on a small phone,
+ * which is what makes six of them read as a row of slots rather than a table.
+ */
+export const OTP_BOX_HEIGHT = 56;

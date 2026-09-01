@@ -17,6 +17,17 @@ import {
   loadHistory,
 } from '../lib/history';
 import { fetchSpeciesInfo } from '../lib/detector';
+import {
+  AuthError,
+  clearSession,
+  fetchMe,
+  loadSession,
+  logoutRemote,
+  normalizeEmail,
+  persistSession,
+  updateDisplayName,
+  type Session,
+} from '../lib/auth';
 import { useNetworkOnline } from '../lib/network';
 import type { BannerTone } from '../components/Banner';
 
@@ -59,6 +70,18 @@ interface AppStateContextValue {
   /** The find whose pin is selected on the map, if any. */
   selectedPin: HistoryEntry | null;
   setSelectedPinId: (id: string | null) => void;
+  /** Who is signed in, or null. `App.tsx` gates the whole app on this. */
+  session: Session | null;
+  /**
+   * True until the stored session has been read. The native splash has to wait on this,
+   * or a signed-in user sees the intro for a frame before the camera.
+   */
+  sessionLoading: boolean;
+  /** Called by the auth flow once a code has verified. */
+  completeSignIn: (session: Session) => void;
+  signOut: () => Promise<void>;
+  /** Saves a display name on the server and updates the cached profile. */
+  saveDisplayName: (name: string) => Promise<void>;
 }
 
 const AppStateContext = createContext<AppStateContextValue | null>(null);
@@ -70,6 +93,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const [historyLoading, setHistoryLoading] = useState(true);
   const [selectedEntryId, setSelectedEntryId] = useState<string | null>(null);
   const [selectedPinId, setSelectedPinId] = useState<string | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [sessionLoading, setSessionLoading] = useState(true);
 
   const networkOnline = useNetworkOnline();
   const timers = useRef(new Map<string, ReturnType<typeof setTimeout>>());
@@ -145,6 +170,81 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       );
     }
   }, [networkOnline, pushBanner]);
+
+  // Read once at launch. `loadSession` swallows a corrupt read and returns null, so the
+  // worst case is being asked to sign in again — never a crash before the first frame.
+  useEffect(() => {
+    let cancelled = false;
+
+    loadSession().then((stored) => {
+      if (cancelled) return;
+      setSession(stored);
+      setSessionLoading(false);
+
+      if (!stored) return;
+
+      fetchMe(stored.token)
+        .then(async (user) => {
+          if (cancelled) return;
+          const next: Session = {
+            token: stored.token,
+            user,
+            email: normalizeEmail(user.email),
+          };
+          await persistSession(next);
+          if (!cancelled) setSession(next);
+        })
+        .catch(async (error) => {
+          if (cancelled) return;
+          if (error instanceof AuthError && error.expired) {
+            await clearSession();
+            if (!cancelled) setSession(null);
+          }
+        });
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const completeSignIn = useCallback((next: Session) => {
+    setSession({
+      ...next,
+      email: normalizeEmail(next.email),
+      user: { ...next.user, email: normalizeEmail(next.user.email) },
+    });
+  }, []);
+
+  /**
+   * Drops the session but leaves the finds alone. History is local to the device and was
+   * never tied to an identity (§4) — deleting someone's photographs because they signed
+   * out would be destroying data they never handed us in the first place.
+   */
+  const signOut = useCallback(async () => {
+    const token = session?.token;
+    if (token) await logoutRemote(token);
+    await clearSession();
+    setSession(null);
+    setActiveTab('camera');
+    setSelectedEntryId(null);
+    setSelectedPinId(null);
+  }, [session]);
+
+  const saveDisplayName = useCallback(
+    async (name: string) => {
+      if (!session) throw new AuthError('Sign in again.', 'warning', { expired: true });
+      const user = await updateDisplayName(session.token, name);
+      const next: Session = {
+        token: session.token,
+        user,
+        email: normalizeEmail(user.email),
+      };
+      await persistSession(next);
+      setSession(next);
+    },
+    [session],
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -234,6 +334,11 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       setSelectedEntryId,
       selectedPin,
       setSelectedPinId,
+      session,
+      sessionLoading,
+      completeSignIn,
+      signOut,
+      saveDisplayName,
     }),
     [
       activeTab,
@@ -248,6 +353,11 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       backfillSpeciesInfo,
       selectedEntry,
       selectedPin,
+      session,
+      sessionLoading,
+      completeSignIn,
+      signOut,
+      saveDisplayName,
     ],
   );
 

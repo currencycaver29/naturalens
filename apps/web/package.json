@@ -8,10 +8,12 @@
     "start": "next start",
     "lint": "eslint",
     "pages:build": "next build",
-    "preview": "npm run build && wrangler dev",
-    "deploy": "npm run build && wrangler deploy",
+    "preview": "npm run db:migrate:local && npm run build && wrangler dev",
+    "deploy": "npm run db:migrate && npm run build && wrangler deploy",
     "db:migrate:local": "wrangler d1 migrations apply naturalens-waitlist --local",
     "db:migrate": "wrangler d1 migrations apply naturalens-waitlist --remote",
+    "typecheck:worker": "tsc -p worker/tsconfig.json --noEmit",
+    "test:worker": "node --experimental-strip-types --test worker/crypto.test.ts",
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
@@ -29,6 +31,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
+    "@cloudflare/workers-types": "^5.20260801.1",
     "typescript": "^5",
     "wrangler": "^4.120.0"
   }

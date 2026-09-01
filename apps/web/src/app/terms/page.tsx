@@ -31,7 +31,7 @@ export default function TermsPage() {
           Terms of Service
         </h1>
         <p className="mb-12 text-sm text-muted">
-          Last updated: August 9, 2026
+          Last updated: September 1, 2026
         </p>
 
         <div className="space-y-10 text-base leading-relaxed text-fg/90">
@@ -71,9 +71,9 @@ export default function TermsPage() {
             </h2>
             <p>
               You must be able to form a binding contract in your jurisdiction
-              to use Naturalens. If the app later requires an account, you are
-              responsible for keeping your credentials secure and for activity
-              under your account.
+              to use Naturalens. The mobile app requires an email address to
+              sign in. You are responsible for access to that address and for
+              activity under the resulting session.
             </p>
           </section>
 
@@ -82,10 +82,12 @@ export default function TermsPage() {
               4. Early access and waitlist
             </h2>
             <p>
-              Joining the waitlist does not guarantee access, timing, or
-              features. Early-access builds may be incomplete, unstable, or
-              withdrawn at any time. We may contact you at the email you provide
-              about access, product updates, or related notices.
+              The mobile app signs you in by emailing a one-time six-digit code
+              to the address you provide. Early-access builds may be incomplete,
+              unstable, or withdrawn at any time. Joining the website waitlist
+              does not guarantee access, timing, or features. We may contact you
+              at the email you provide about access, product updates, or related
+              notices.
             </p>
           </section>
 

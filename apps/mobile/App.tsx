@@ -16,6 +16,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppStateProvider, useAppState } from './src/contexts/AppStateContext';
 import { MainLayout } from './src/layouts/MainLayout';
+import { AuthFlow } from './src/layouts/AuthFlow';
 import { BrandSplash } from './src/components/BrandSplash';
 import { Colors, RequiredFontFamilies } from './src/theme/tokens';
 
@@ -46,19 +47,32 @@ if (missing.length > 0) {
 
 function AppContent() {
   const [brandingDone, setBrandingDone] = useState(false);
-  const { activeTab } = useAppState();
+  const { activeTab, session, sessionLoading } = useAppState();
 
   const [fontsLoaded] = useFonts(FONTS);
 
   // Hold the native splash until the fonts are in, so no screen renders in the system
-  // face and then snaps to Outfit/Archivo.
+  // face and then snaps to Outfit/Archivo — and until we know whether anyone is signed
+  // in, or a returning user gets a frame of the onboarding intro before the camera.
   useEffect(() => {
-    if (fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded]);
+    if (fontsLoaded && !sessionLoading) SplashScreen.hideAsync();
+  }, [fontsLoaded, sessionLoading]);
 
-  if (!fontsLoaded) {
+  if (!fontsLoaded || sessionLoading) {
     // Same ground as the native splash — anything else flashes on the handoff.
     return <View style={{ flex: 1, backgroundColor: Colors.bg }} />;
+  }
+
+  // Sign-in replaces the app rather than covering it: `MainLayout` always draws the
+  // floating tab pill, which would hang over the onboarding screens. `AuthFlow` owns its
+  // own status bar, since only it knows which of its three screens is showing.
+  if (!session) {
+    return (
+      <>
+        <AuthFlow />
+        {!brandingDone && <BrandSplash onDone={() => setBrandingDone(true)} />}
+      </>
+    );
   }
 
   // The camera and the map both run full-bleed under the status bar. The camera is a dark

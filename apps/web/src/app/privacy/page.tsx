@@ -31,7 +31,7 @@ export default function PrivacyPage() {
           Privacy Policy
         </h1>
         <p className="mb-12 text-sm text-muted">
-          Last updated: August 9, 2026
+          Last updated: September 1, 2026
         </p>
 
         <div className="space-y-10 text-base leading-relaxed text-fg/90">
@@ -54,9 +54,15 @@ export default function PrivacyPage() {
             <p>Depending on how you use Naturalens, we may collect:</p>
             <ul className="list-disc space-y-2 pl-6">
               <li>
+                <span className="font-medium">Account details.</span>{" "}
+                The email you use to sign in to the mobile app, an optional
+                display name, and the time the account was created. We email a
+                six-digit sign-in code to that address.
+              </li>
+              <li>
                 <span className="font-medium">Waitlist and contact details.</span>{" "}
                 Email address and any related notes you submit when requesting
-                early access.
+                early access on the website.
               </li>
               <li>
                 <span className="font-medium">Photos and observation data.</span>{" "}
@@ -86,7 +92,7 @@ export default function PrivacyPage() {
             <ul className="list-disc space-y-2 pl-6">
               <li>Provide species identification and show results in the app</li>
               <li>Store and display your personal observation history</li>
-              <li>Operate the early-access waitlist and related product emails</li>
+              <li>Operate sign-in, the early-access waitlist, and related product emails</li>
               <li>Debug issues, improve accuracy, and develop new features</li>
               <li>Protect the service against abuse and technical failures</li>
             </ul>
@@ -108,9 +114,9 @@ export default function PrivacyPage() {
             </p>
             <p>
               We may also use infrastructure providers for hosting, storage,
-              analytics, crash reporting, or email delivery. Those providers
-              process data on our behalf under contractual obligations where
-              applicable.
+              analytics, crash reporting, or email delivery (including sending
+              one-time sign-in codes). Those providers process data on our
+              behalf under contractual obligations where applicable.
             </p>
           </section>
 
@@ -131,13 +137,14 @@ export default function PrivacyPage() {
               6. Retention
             </h2>
             <p>
-              We keep waitlist emails and related records while the waitlist is
-              active and as needed for product communications or legal
-              requirements. Photos and identification requests processed in the
-              cloud are retained only as long as needed to provide the result
-              and operate the service, unless a longer period is required for
-              security, debugging, or law. You can delete local observations
-              from the app where that control is available.
+              We keep account emails, display names, and waitlist records while
+              the product is active and as needed for sign-in, product
+              communications, or legal requirements. Photos and identification
+              requests processed in the cloud are retained only as long as
+              needed to provide the result and operate the service, unless a
+              longer period is required for security, debugging, or law. You can
+              delete local observations from the app where that control is
+              available.
             </p>
           </section>
 
@@ -166,6 +173,11 @@ export default function PrivacyPage() {
               <li>Decline camera, photo library, or location permissions</li>
               <li>Choose which photos to submit for identification</li>
               <li>Delete observations stored in the app where supported</li>
+              <li>Change or clear your display name in the app</li>
+              <li>
+                Sign out, or request deletion of your account email by contacting
+                us with the address you used to sign in
+              </li>
               <li>
                 Request removal from the waitlist by contacting us with the email
                 you used to sign up

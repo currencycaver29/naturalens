@@ -33,6 +33,15 @@ is a placeholder for.
 
 Restart the dev server after editing `.env`; Expo only reads it at startup.
 
+## Sign-in
+
+The app is gated on an email + six-digit code. Codes are emailed by the
+`naturalens-web` Worker (`POST /api/auth/request-code`). The live default is
+`https://naturalens.ca`. To hit a local Worker, set `EXPO_PUBLIC_API_BASE_URL` in `.env`
+(see `.env.example`).
+
+Until `RESEND_API_KEY` and `AUTH_PEPPER` are set on that Worker, Send code fails closed.
+
 ## How it works
 
 `src/lib/detector.ts` shrinks the capture to 1024px, sends it to `gemini-3.1-flash-lite`
