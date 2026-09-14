@@ -31,7 +31,12 @@
         "android.permission.ACCESS_COARSE_LOCATION",
         "android.permission.ACCESS_FINE_LOCATION"
       ],
-      "package": "com.naturalens.app"
+      "package": "com.naturalens.app",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBunUYESrqU2ZDlqTbUPK-kYu9tEojasf8"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

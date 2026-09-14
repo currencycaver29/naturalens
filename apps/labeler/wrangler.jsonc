@@ -24,7 +24,7 @@
   },
   "vars": {
     "AUTH_MODE": "pin",
-    "PIN_AUTH_EMAILS": "cdkitmail@gmail.com,abhay.msgs@gmail.com",
+    "PIN_AUTH_EMAILS": "divijk2911@gmail.com",
     "PIN_AUTH_MAX_ATTEMPTS": "4",
     "PIN_AUTH_LOCK_MINUTES": "30",
     "R2_CAP_STORAGE_BYTES": "8589934592",
@@ -36,13 +36,13 @@
     {
       "binding": "DB",
       "database_name": "naturalens-labels",
-      "database_id": "2fe255ec-de36-4899-9443-9b651612773d",
+      "database_id": "18f1bc2d-5c7b-41b1-839f-162db06391d6",
       "migrations_dir": "migrations"
     },
     {
       "binding": "WAITLIST_DB",
       "database_name": "naturalens-waitlist",
-      "database_id": "5d04113a-851b-485c-a0e9-0d4ccb02cd07"
+      "database_id": "de698223-6c18-4989-8cb7-8a46ac615915"
     }
   ],
   "r2_buckets": [

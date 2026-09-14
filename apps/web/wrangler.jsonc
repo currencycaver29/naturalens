@@ -26,7 +26,7 @@
     {
       "binding": "WAITLIST_DB",
       "database_name": "naturalens-waitlist",
-      "database_id": "5d04113a-851b-485c-a0e9-0d4ccb02cd07",
+      "database_id": "de698223-6c18-4989-8cb7-8a46ac615915",
       "migrations_dir": "migrations"
     }
   ]

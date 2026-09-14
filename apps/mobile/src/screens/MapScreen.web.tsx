@@ -6,12 +6,6 @@ let MapView: any = View;
 let Marker: any = View;
 let PROVIDER_GOOGLE: any = undefined;
 
-if (Platform.OS !== 'web') {
-  const Maps = require('react-native-maps');
-  MapView = Maps.default;
-  Marker = Maps.Marker;
-  PROVIDER_GOOGLE = Maps.PROVIDER_GOOGLE;
-}
 
 type Region = {
   latitude: number;
