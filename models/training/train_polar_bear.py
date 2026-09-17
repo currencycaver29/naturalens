@@ -407,7 +407,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--epochs", type=int, default=30)
     parser.add_argument("--batch-size", type=int, default=4)
-    parser.add_argument("--lr", type=float, default=5e-4)
+    parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--workers", type=int, default=0)
     parser.add_argument("--seed", type=int, default=13)
     parser.add_argument("--skip-export", action="store_true")
@@ -445,8 +445,8 @@ def main() -> None:
     for epoch in range(1, args.epochs + 1):
         loss = train_one_epoch(model, train_loader, optimizer, device, epoch)
         scheduler.step()
-        preds = predict_dataset(model, val_ds, device, score_thresh=0.1)
-        metrics = evaluate_map(preds, iou_thresh=0.5, score_thresh=0.15)
+        preds = predict_dataset(model, val_ds, device, score_thresh=0.15)
+        metrics = evaluate_map(preds, iou_thresh=0.5, score_thresh=0.3)
         history.append({"epoch": epoch, "loss": loss, "map50": metrics["map50"]})
         print(
             f"  epoch {epoch}: val mAP@0.5={metrics['map50']:.3f}  "
@@ -471,8 +471,8 @@ def main() -> None:
     ckpt = torch.load(best_path, map_location="cpu", weights_only=False)
     model.load_state_dict(ckpt["model"])
     model.to(device)
-    preds = predict_dataset(model, val_ds, device, score_thresh=0.1)
-    metrics = evaluate_map(preds, iou_thresh=0.5, score_thresh=0.15)
+    preds = predict_dataset(model, val_ds, device, score_thresh=0.15)
+    metrics = evaluate_map(preds, iou_thresh=0.5, score_thresh=0.3)
     metrics["arch"] = "ssdlite320_mobilenet_v3_large"
     metrics["epochs"] = args.epochs
     metrics["best_epoch"] = ckpt.get("epoch")
