@@ -107,16 +107,17 @@ export default function PrivacyPage() {
               4. AI processing and third parties
             </h2>
             <p>
-              Identification currently runs in the cloud using third-party AI
-              providers. When you request an identification, your photo and
-              related request data may be transmitted to those providers solely
-              to generate a species suggestion.
+              Identification currently runs in the cloud using Google's Gemini API
+              (Free Tier). When you request an identification, your photo and
+              related request data are transmitted to Google to generate a species
+              suggestion. Under the Free Tier, Google may use this data to train
+              and improve their models.
             </p>
             <p>
-              We may also use infrastructure providers for hosting, storage,
-              analytics, crash reporting, or email delivery (including sending
-              one-time sign-in codes). Those providers process data on our
-              behalf under contractual obligations where applicable.
+              We may also use infrastructure providers for hosting, storage, or
+              email delivery (including sending one-time sign-in codes). Those
+              providers process data on our behalf under contractual obligations
+              where applicable.
             </p>
           </section>
 

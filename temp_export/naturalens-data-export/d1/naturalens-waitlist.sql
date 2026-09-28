@@ -1,0 +1,86 @@
+PRAGMA defer_foreign_keys=TRUE;
+CREATE TABLE IF NOT EXISTS "d1_migrations"(
+		id         INTEGER PRIMARY KEY AUTOINCREMENT,
+		name       TEXT UNIQUE,
+		applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+INSERT INTO "d1_migrations" ("id","name","applied_at") VALUES(1,'0001_waitlist.sql','2026-08-09 18:43:49');
+INSERT INTO "d1_migrations" ("id","name","applied_at") VALUES(2,'0002_auth.sql','2026-09-01 23:29:45');
+CREATE TABLE waitlist (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT NOT NULL COLLATE NOCASE,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  user_agent TEXT,
+  ip TEXT
+);
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(1,'test@naturalens.dev','2026-08-09 18:44:18','curl/8.7.1','205.200.45.145');
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(2,'second@naturalens.dev','2026-08-09 18:44:35','curl/8.7.1','205.200.45.145');
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(3,'bennyduthoit@gmail.com','2026-08-09 21:23:26','Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36','199.119.235.224');
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(4,'abhay.msgs@gmail.com','2026-08-14 02:53:56','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36','142.161.232.83');
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(5,'cdkitmail@gmail.com','2026-08-14 03:11:05','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36','142.161.8.107');
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(6,'benjamintduthoit@gmail.com','2026-08-16 02:22:05','Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36','199.119.235.172');
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(7,'walteroakley@gmail.com','2026-08-16 16:43:02','Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/30.0 Chrome/143.0.0.0 Mobile Safari/537.36','66.199.176.12');
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(8,'skitchen1212@gmail.com','2026-08-17 16:30:07','Mozilla/5.0 (iPhone; CPU iPhone OS 26_6_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/151.0.7922.112 Mobile/15E148 Safari/604.1','2604:3d09:a678:4200:b43e:5cd2:3c59:8d86');
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(9,'mstover@live.ca','2026-08-19 18:38:04','Mozilla/5.0 (iPhone; CPU iPhone OS 26_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/23G71 Safari/604.1 [FBAN/FBIOS;FBAV/574.0.0.41.71;FBBV/1038059635;FBDV/iPhone18,2;FBMD/iPhone;FBSN/iOS;FBSV/26.6;FBSS/3;FBID/phone;FBLC/en_US;FBOP/5;FBRV/1044391777;IABMV/1]','2605:8d80:5880:74c3:4ce9:58fc:1e4:3ae4');
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(10,'jarevka@hotmail.com','2026-08-19 22:14:17','Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36','2a0d:e487:11f:3f11:549b:c0d:379d:a963');
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(11,'jostlingaround@gmail.com','2026-08-20 03:56:20','Mozilla/5.0 (Android 17; Mobile; rv:153.0) Gecko/153.0 Firefox/153.0','45.44.33.19');
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(12,'lara@mindspring.com','2026-08-20 04:22:23','Mozilla/5.0 (iPhone; CPU iPhone OS 26_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/23C55 Safari/604.1 [FBAN/FBIOS;FBAV/570.0.0.54.72;FBBV/1017898548;FBDV/iPhone13,1;FBMD/iPhone;FBSN/iOS;FBSV/26.2;FBSS/3;FBID/phone;FBLC/en_US;FBOP/5;FBRV/1025395738;IABMV/1]','142.161.186.250');
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(13,'truong-d@webmail.uwinnipeg.ca','2026-08-20 13:52:33','Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:154.0) Gecko/20100101 Firefox/154.0','216.73.64.186');
+INSERT INTO "waitlist" ("id","email","created_at","user_agent","ip") VALUES(14,'dtataryn@mts.net','2026-08-21 01:41:57','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36','198.254.224.8');
+CREATE TABLE users (
+  id TEXT PRIMARY KEY,
+  email TEXT NOT NULL COLLATE NOCASE,
+  display_name TEXT,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+INSERT INTO "users" ("id","email","display_name","created_at","updated_at") VALUES('5ed65232-ffd4-4b2b-86f5-c6d05b78f8b4','abhaysharmacse@icloud.com',NULL,'2026-09-01 23:31:37','2026-09-01 23:31:37');
+INSERT INTO "users" ("id","email","display_name","created_at","updated_at") VALUES('5ab8b4d8-1991-43ca-ab50-865d434bf740','cdkitmail@gmail.com',NULL,'2026-09-02 00:21:34','2026-09-02 00:21:34');
+INSERT INTO "users" ("id","email","display_name","created_at","updated_at") VALUES('863e7d9b-b0a8-44a9-ab42-768fa50759c3','divijk2911@gmail.com','divij','2026-09-10 09:07:14','2026-09-10 10:05:59');
+CREATE TABLE otp_challenges (
+  email TEXT PRIMARY KEY COLLATE NOCASE,
+  code_hash TEXT NOT NULL,
+  expires_at INTEGER NOT NULL,
+  attempts INTEGER NOT NULL DEFAULT 0,
+  last_sent_at INTEGER NOT NULL
+);
+INSERT INTO "otp_challenges" ("email","code_hash","expires_at","attempts","last_sent_at") VALUES('divijk2911@gmail.comd','a990c7a669ddb9ae1ddc4b2454da413589574e1d5270d8ba78b972b0b5f763df',1789062538995,0,1789061938995);
+CREATE TABLE otp_sends (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT NOT NULL COLLATE NOCASE,
+  ip TEXT,
+  sent_at INTEGER NOT NULL
+);
+INSERT INTO "otp_sends" ("id","email","ip","sent_at") VALUES(1,'abhaysharmacse@icloud.com','142.161.232.83',1788305445458);
+INSERT INTO "otp_sends" ("id","email","ip","sent_at") VALUES(2,'abhaysharmacse@icloud.com','142.161.232.83',1788305488269);
+INSERT INTO "otp_sends" ("id","email","ip","sent_at") VALUES(3,'cdkitmail@gmail.com','142.161.8.107',1788308485454);
+INSERT INTO "otp_sends" ("id","email","ip","sent_at") VALUES(4,'divijk2911@gmail.com','202.133.59.164',1789031221874);
+INSERT INTO "otp_sends" ("id","email","ip","sent_at") VALUES(5,'divijk2911@gmail.com','202.133.59.164',1789031696778);
+INSERT INTO "otp_sends" ("id","email","ip","sent_at") VALUES(6,'divijk2911@gmail.comd','202.133.59.164',1789061938995);
+INSERT INTO "otp_sends" ("id","email","ip","sent_at") VALUES(7,'divijk2911@gmail.com','202.133.59.164',1789061946192);
+INSERT INTO "otp_sends" ("id","email","ip","sent_at") VALUES(8,'divijk2911@gmail.com','202.133.59.164',1789063190462);
+CREATE TABLE sessions (
+  token_hash TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  expires_at TEXT NOT NULL,
+  last_seen_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+INSERT INTO "sessions" ("token_hash","user_id","created_at","expires_at","last_seen_at") VALUES('2b487efd1b2480f4c5261ca95196ad4578ed991a5491a03f47e5d7794d179f83','5ed65232-ffd4-4b2b-86f5-c6d05b78f8b4','2026-09-01 23:31:37','2026-11-30 23:31:37','2026-09-05 21:49:25');
+INSERT INTO "sessions" ("token_hash","user_id","created_at","expires_at","last_seen_at") VALUES('0411d6cfe236dd27c464fa6dae236e23c9e950f8e0dfbec196b31955d392f091','5ab8b4d8-1991-43ca-ab50-865d434bf740','2026-09-02 00:21:34','2026-12-01 00:21:34','2026-09-08 18:59:36');
+INSERT INTO "sessions" ("token_hash","user_id","created_at","expires_at","last_seen_at") VALUES('773f5754db20d899537134d107ed20c91a74022cdbabf00112e9ab99583ad7d2','863e7d9b-b0a8-44a9-ab42-768fa50759c3','2026-09-10 18:00:11','2026-12-09 18:00:10','2026-09-10 18:00:11');
+CREATE TABLE auth_attempts (
+  key TEXT PRIMARY KEY,
+  fails INTEGER NOT NULL DEFAULT 0,
+  locked_until TEXT,
+  updated_at TEXT NOT NULL
+);
+DELETE FROM sqlite_sequence;
+INSERT INTO "sqlite_sequence" ("name","seq") VALUES('d1_migrations',2);
+INSERT INTO "sqlite_sequence" ("name","seq") VALUES('waitlist',14);
+INSERT INTO "sqlite_sequence" ("name","seq") VALUES('otp_sends',8);
+CREATE UNIQUE INDEX waitlist_email_unique ON waitlist (email);
+CREATE UNIQUE INDEX users_email_unique ON users (email);
+CREATE INDEX otp_sends_email_sent ON otp_sends (email, sent_at);
+CREATE INDEX otp_sends_ip_sent ON otp_sends (ip, sent_at);
+CREATE INDEX sessions_user ON sessions (user_id);

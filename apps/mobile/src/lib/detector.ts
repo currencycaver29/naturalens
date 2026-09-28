@@ -12,8 +12,6 @@ import {
  * Cloud rather than on-device: Expo Go can only load the native modules it ships
  * with, so an on-device TFLite runtime would mean giving up the Expo Go workflow.
  */
-const ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/interactions';
-
 /**
  * flash-lite over flash: measured ~1.5s vs ~7-18s per photo, with the same answer on
  * test images. Naming an animal doesn't need the bigger model's reasoning.
@@ -169,19 +167,12 @@ function messageForStatus(status: number, detail: string): DetectorError {
 
 /** One structured-JSON round trip. Both callers below differ only in input and schema. */
 async function askGemini<T>(input: unknown[], schema: object): Promise<T> {
-  const apiKey = process.env.EXPO_PUBLIC_GEMINI_API_KEY;
-  if (!apiKey) {
-    throw new DetectorError(
-      'Missing EXPO_PUBLIC_GEMINI_API_KEY. Add it to apps/mobile/.env and restart the dev server.',
-      'danger',
-    );
-  }
+  const proxyUrl = process.env.EXPO_PUBLIC_GEMINI_PROXY_URL || 'https://gemini-proxy.naturalens.workers.dev';
 
   const request = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'x-goog-api-key': apiKey,
     },
     body: JSON.stringify({
       model: MODEL,
@@ -199,7 +190,7 @@ async function askGemini<T>(input: unknown[], schema: object): Promise<T> {
 
   let response: Response;
   try {
-    response = await fetch(ENDPOINT, request);
+    response = await fetch(proxyUrl + '/v1beta/interactions', request);
   } catch {
     // fetch only rejects on a network-level failure — a 4xx or 5xx still resolves. So
     // anything landing here means the request never made it off the phone.
