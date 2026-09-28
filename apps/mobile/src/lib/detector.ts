@@ -167,7 +167,7 @@ function messageForStatus(status: number, detail: string): DetectorError {
 
 /** One structured-JSON round trip. Both callers below differ only in input and schema. */
 async function askGemini<T>(input: unknown[], schema: object): Promise<T> {
-  const proxyUrl = process.env.EXPO_PUBLIC_GEMINI_PROXY_URL || 'https://gemini-proxy.naturalens.workers.dev';
+  const proxyUrl = process.env.EXPO_PUBLIC_GEMINI_PROXY_URL || 'https://gemini-proxy.divijk2911.workers.dev';
 
   const request = {
     method: 'POST',
