@@ -74,9 +74,7 @@
       }
     },
     "owner": "naturalens",
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
+    "runtimeVersion": "1.0.0",
     "updates": {
       "url": "https://u.expo.dev/f65257ef-23ba-4139-b016-9e141dbd4d6e"
     }
