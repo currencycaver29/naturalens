@@ -55,7 +55,7 @@ const IS_ANDROID = Platform.OS === 'android';
 /** Screens 12, 13, 14 — where the finds were made. */
 export function MapScreen() {
   const insets = useSafeAreaInsets();
-  const mapRef = useRef<MapView>(null);
+  const mapRef = useRef<any>(null);
   const { history, selectedPin, setSelectedPinId, setSelectedEntryId } = useAppState();
 
   const mapped = useMemo(() => history.filter((entry) => entry.location), [history]);
